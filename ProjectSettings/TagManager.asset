@@ -3,7 +3,31 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - seekingMine
+  - player
+  - durChip
+  - intChip
+  - velChip
+  - pyramidRobot
+  - squareRobot
+  - sphereRobot
+  - ScannerLvl2
+  - ScannerLvl1
+  - ScannerLvl3
+  - LazerLvl1
+  - LazerLvl2
+  - LazerLvl3
+  - MineLvl1
+  - MineLvl2
+  - MineLvl3
+  - dmgChip
+  - frtChip
+  - baseSphere
+  - Lazer
+  - ScannerLvl4
+  - ScannerLvl5
+  - LazerScanner
   layers:
   - Default
   - TransparentFX
