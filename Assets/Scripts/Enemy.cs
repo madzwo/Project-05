@@ -38,14 +38,14 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void OnCollisionEnter(Collision collision)
-    {
-        if(collision.gameObject.tag == "playerBullet")
-        {
-            Destroy(collision.gameObject);
-            Destroy(gameObject);
-        }
-    }
+    // public void OnCollisionEnter(Collision collision)
+    // {
+    //     if(collision.gameObject.tag == "playerBullet")
+    //     {
+    //         Destroy(collision.gameObject);
+    //         Destroy(gameObject);
+    //     }
+    // }
 
     public void TakeDamage(float dmg)
     {

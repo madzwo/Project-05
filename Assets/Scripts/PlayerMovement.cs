@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -23,6 +25,11 @@ public class PlayerMovement : MonoBehaviour
     public float health;
 
     public int clearance;
+
+    public TMP_Text clearanceText;
+    public TMP_Text velText;
+    public TMP_Text dmgText;
+    public TMP_Text durText;
 
     public GameObject bulletPrefab;
     public Transform firePoint;
@@ -53,6 +60,15 @@ public class PlayerMovement : MonoBehaviour
 
         MyInput();
         Fire();
+        UI();
+    }
+
+    public void UI()
+    {
+        clearanceText.text = "Security Clearance Lvl " + clearance;
+        velText.text = "Velocity (.vel)  " + vel;
+        dmgText.text = "Damage (.dmg)  " + dmg;
+        durText.text = "Durability (.dur)  " + dur;
     }
 
     private void FixedUpdate()

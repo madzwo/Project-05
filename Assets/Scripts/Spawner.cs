@@ -22,11 +22,9 @@ public class Spawner : MonoBehaviour
 
     void Start()
     {
-        spawnRate = 5f;
         timeTillSpawn = spawnRate;
         player = GameObject.FindGameObjectWithTag("sphereRobot");
-        spawnDistance = 150f;
-        health = 25;
+        
 
     }
 
