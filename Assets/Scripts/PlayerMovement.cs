@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
 
     public float health;
 
-    public int clearence;
+    public int clearance;
 
     public GameObject bulletPrefab;
     public Transform firePoint;
@@ -38,13 +38,13 @@ public class PlayerMovement : MonoBehaviour
         frt = 1;
         dmg = 1;
 
-        clearence = 1;
+        clearance = 1;
 
     }
 
     void Update()
     {
-        velocity = 100f + (vel * 50f);
+        velocity = 25f + (vel * 25f);
         durability = 5f + (dur - 1f); // (maxHealth)
         firerate = 5f + (frt - 1f);
         damage = 3f + (dmg - 1f);
@@ -77,7 +77,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Debug.Log("fire");
             GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
             bullet.GetComponent<Rigidbody>().AddForce(firePoint.up * bulletSpeed, ForceMode.Force);
         }
@@ -135,24 +134,30 @@ public class PlayerMovement : MonoBehaviour
             Destroy(collision.gameObject);
             dmg += 1;
         }
+        if(collision.gameObject.CompareTag("SecurityChip"))
+        {
+            Debug.Log("SecurityChip collected");
+            Destroy(collision.gameObject);
+            clearance += 1;
+        }
 
-        if(collision.gameObject.CompareTag("ScannerLvl1") && clearence >= 1)
+        if(collision.gameObject.CompareTag("ScannerLvl1") && clearance >= 1)
         {
             Destroy(collision.gameObject);
         }
-        if(collision.gameObject.CompareTag("ScannerLvl2") && clearence >= 2)
+        if(collision.gameObject.CompareTag("ScannerLvl2") && clearance >= 2)
         {
             Destroy(collision.gameObject);
         }
-        if(collision.gameObject.CompareTag("ScannerLvl3") && clearence >= 3)
+        if(collision.gameObject.CompareTag("ScannerLvl3") && clearance >= 3)
         {
             Destroy(collision.gameObject);
         }
-        if(collision.gameObject.CompareTag("ScannerLvl4") && clearence >= 4)
+        if(collision.gameObject.CompareTag("ScannerLvl4") && clearance >= 4)
         {
             Destroy(collision.gameObject);
         }
-        if(collision.gameObject.CompareTag("ScannerLvl5") && clearence >= 5)
+        if(collision.gameObject.CompareTag("ScannerLvl5") && clearance >= 5)
         {
             Destroy(collision.gameObject);
         }

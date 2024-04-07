@@ -13,6 +13,12 @@ public class Spawner : MonoBehaviour
     public GameObject player;
     public float spawnDistance;
 
+    public float health;
+    public GameObject sphere;
+
+    public GameObject deadSpawner;
+
+
 
     void Start()
     {
@@ -20,6 +26,7 @@ public class Spawner : MonoBehaviour
         timeTillSpawn = spawnRate;
         player = GameObject.FindGameObjectWithTag("sphereRobot");
         spawnDistance = 150f;
+        health = 25;
 
     }
 
@@ -35,6 +42,7 @@ public class Spawner : MonoBehaviour
             }
             timeTillSpawn -= Time.deltaTime;
         }
+        
     }
 
     public void SpawnEnemy()
@@ -55,4 +63,29 @@ public class Spawner : MonoBehaviour
         }
         Instantiate(enemy, spawnPoint.position, spawnPoint1.rotation);
     }
+
+    public void TakeDamage(float dmg)
+    {
+        Debug.Log("spawner takeDamage");
+        health -= dmg;
+        if (health <= 0)
+        {
+            Instantiate(deadSpawner, transform.position, transform.rotation);
+            Destroy(gameObject);
+        }
+    }
+
+    // public void OnCollisionEnter(Collision collision)
+    // {
+    //     Debug.Log("hit");
+    //     if(collision.gameObject.tag == "playerBullet")
+    //     {
+    //         Debug.Log("hit - health: " + health);
+    //         PlayerMovement playerMovement = player.GetComponent<PlayerMovement>();
+    //         float damage = playerMovement.damage;
+    //         health -= damage;
+    //         Debug.Log("- " + damage + "health: " + health);
+
+    //     }
+    // }
 }

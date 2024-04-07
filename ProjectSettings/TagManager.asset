@@ -30,6 +30,8 @@ TagManager:
   - LazerScanner
   - Enemy
   - playerBullet
+  - Spawner
+  - SecurityChip
   layers:
   - Default
   - TransparentFX

@@ -7,10 +7,12 @@ public class Enemy : MonoBehaviour
     public GameObject player;
     public float moveSpeed; 
     public float followDistance;
+    public float health;
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("sphereRobot");
+        health = 1;
 
     }
 
@@ -40,8 +42,16 @@ public class Enemy : MonoBehaviour
     {
         if(collision.gameObject.tag == "playerBullet")
         {
-            Debug.Log("hit");
             Destroy(collision.gameObject);
+            Destroy(gameObject);
+        }
+    }
+
+    public void TakeDamage(float dmg)
+    {
+        health -= dmg;
+        if (health <= 0)
+        {
             Destroy(gameObject);
         }
     }
