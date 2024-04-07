@@ -73,17 +73,12 @@ public class Spawner : MonoBehaviour
         }
     }
 
-    // public void OnCollisionEnter(Collision collision)
-    // {
-    //     Debug.Log("hit");
-    //     if(collision.gameObject.tag == "playerBullet")
-    //     {
-    //         Debug.Log("hit - health: " + health);
-    //         PlayerMovement playerMovement = player.GetComponent<PlayerMovement>();
-    //         float damage = playerMovement.damage;
-    //         health -= damage;
-    //         Debug.Log("- " + damage + "health: " + health);
+    public void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "playerBullet")
+        {
+            sphere.transform.localScale -= new Vector3(.1f,.1f,.1f);
 
-    //     }
-    // }
+        }
+    }
 }
