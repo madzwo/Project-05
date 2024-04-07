@@ -32,6 +32,8 @@ TagManager:
   - playerBullet
   - Spawner
   - SecurityChip
+  - enemyBullet
+  - EnemyBullet
   layers:
   - Default
   - TransparentFX

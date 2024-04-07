@@ -47,6 +47,9 @@ public class PlayerMovement : MonoBehaviour
 
         clearance = 1;
 
+        health = 5f;
+
+
     }
 
     void Update()
@@ -56,7 +59,6 @@ public class PlayerMovement : MonoBehaviour
         firerate = 5f + (frt - 1f);
         damage = 3f + (dmg - 1f);
 
-        health = durability;
 
         MyInput();
         Fire();
@@ -118,6 +120,15 @@ public class PlayerMovement : MonoBehaviour
         Vector3 spawnPoint = new Vector3(0f,7f,-70f);
         this.transform.position = spawnPoint;
         velocity = temp;
+    }
+
+    public void TakeDamage()
+    {
+        health -= 1f;
+        if (health <= 0)
+        {
+            Respawn();
+        }
     }
 
     public void OnCollisionEnter(Collision collision)

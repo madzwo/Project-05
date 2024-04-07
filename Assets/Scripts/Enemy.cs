@@ -7,12 +7,22 @@ public class Enemy : MonoBehaviour
     public GameObject player;
     public float moveSpeed; 
     public float followDistance;
+    public float stopDistance;
+
     public float health;
+
+    public GameObject bulletPrefab;
+    public Transform firePoint;
+    public float bulletSpeed;
+    public float fireRate;
+    private float timeTillFire;
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("sphereRobot");
         health = 1;
+
+        timeTillFire = fireRate;
 
     }
 
@@ -20,21 +30,32 @@ public class Enemy : MonoBehaviour
     {
         if (player != null)
         {
+            Vector3 direction = player.transform.position - transform.position;
+            Quaternion rotation = Quaternion.LookRotation(direction) * Quaternion.Euler(0, -90, 0);
+            transform.rotation = rotation;
+
             float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
 
             if (distanceToPlayer <= followDistance)
             {
-                Vector3 direction = player.transform.position - transform.position;
-                Quaternion rotation = Quaternion.LookRotation(direction) * Quaternion.Euler(0, -90, 0);
-                transform.rotation = rotation;
-
-                direction.Normalize(); 
-                transform.Translate(direction * moveSpeed * Time.deltaTime, Space.World);
+                if(distanceToPlayer >= stopDistance)
+                {
+                    direction.Normalize(); 
+                    transform.Translate(direction * moveSpeed * Time.deltaTime, Space.World);
+                }
             }
-            else 
+            else
             {
-                
+
             }
+
+            if (timeTillFire <= 0)
+            {
+                GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+                bullet.GetComponent<Rigidbody>().AddForce(-firePoint.up * bulletSpeed, ForceMode.Force);
+                timeTillFire = fireRate;
+            }
+            timeTillFire -= Time.deltaTime;
         }
     }
 

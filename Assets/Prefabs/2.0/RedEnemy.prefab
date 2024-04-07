@@ -83,6 +83,37 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &706632737837963053
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6291458806838531228}
+  m_Layer: 0
+  m_Name: FirePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6291458806838531228
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 706632737837963053}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.49999997, y: -0.5, z: 0.5, w: 0.5}
+  m_LocalPosition: {x: 0.0232, y: -0.0038, z: 0.0001}
+  m_LocalScale: {x: 0.0018361815, y: 0.021185609, z: 0.0018056927}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5952966935632282744}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3261226467762719481
 GameObject:
   m_ObjectHideFlags: 0
@@ -703,6 +734,7 @@ Transform:
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 6291458806838531228}
   - {fileID: 2271233680141096526}
   - {fileID: 8038849690207262179}
   - {fileID: 3233627338794240798}
@@ -794,6 +826,13 @@ MonoBehaviour:
   player: {fileID: 0}
   moveSpeed: 5
   followDistance: 150
+  stopDistance: 50
+  health: 0
+  bulletPrefab: {fileID: 429009123732552332, guid: d7321ccc9339541f6afca0e90600acba,
+    type: 3}
+  firePoint: {fileID: 6291458806838531228}
+  bulletSpeed: 8000
+  fireRate: 2
 --- !u!1 &8587641196017254989
 GameObject:
   m_ObjectHideFlags: 0

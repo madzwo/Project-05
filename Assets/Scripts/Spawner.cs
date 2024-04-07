@@ -64,7 +64,6 @@ public class Spawner : MonoBehaviour
 
     public void TakeDamage(float dmg)
     {
-        Debug.Log("spawner takeDamage");
         health -= dmg;
         if (health <= 0)
         {
