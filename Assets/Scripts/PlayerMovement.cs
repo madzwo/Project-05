@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 
 public class PlayerMovement : MonoBehaviour
@@ -35,6 +36,8 @@ public class PlayerMovement : MonoBehaviour
     public Transform firePoint;
     public float bulletSpeed;
 
+    private float timeTillFire;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -46,17 +49,15 @@ public class PlayerMovement : MonoBehaviour
         dmg = 1;
 
         clearance = 1;
-
         health = 5f;
-
-
+        timeTillFire = 2f;
     }
 
     void Update()
     {
         velocity = 25f + (vel * 25f);
         durability = 5f + (dur - 1f); // (maxHealth)
-        firerate = 5f + (frt - 1f);
+        firerate = 2f - ((frt-1) * .4f);
         damage = 3f + (dmg - 1f);
 
 
@@ -93,12 +94,16 @@ public class PlayerMovement : MonoBehaviour
 
     public void Fire() 
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (timeTillFire <= 0)
         {
-            GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-            bullet.GetComponent<Rigidbody>().AddForce(firePoint.up * bulletSpeed, ForceMode.Force);
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+                bullet.GetComponent<Rigidbody>().AddForce(firePoint.up * bulletSpeed, ForceMode.Force);
+            }
+            timeTillFire = firerate;
         }
-         
+        timeTillFire -= Time.deltaTime;
     }
 
     private void SpeedControl()
@@ -199,10 +204,12 @@ public class PlayerMovement : MonoBehaviour
         }
 
 
-        if(collision.gameObject.CompareTag("seekingMine"))
+        if(collision.gameObject.CompareTag("End"))
         {
-            Respawn();
+            int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+            SceneManager.LoadScene(currentSceneIndex + 1);
         }
+
 
     }
 
