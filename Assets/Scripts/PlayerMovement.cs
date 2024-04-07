@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 
 public class PlayerMovement : MonoBehaviour
@@ -38,6 +39,9 @@ public class PlayerMovement : MonoBehaviour
 
     private float timeTillFire;
 
+    public Slider healthSlider;
+    public Slider firerateSlider;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -57,13 +61,14 @@ public class PlayerMovement : MonoBehaviour
     {
         velocity = 25f + (vel * 25f);
         durability = 5f + (dur - 1f); // (maxHealth)
-        firerate = 2f - ((frt-1) * .4f);
+        firerate = 2f - ((frt - 1f) * .4f);
         damage = 3f + (dmg - 1f);
 
 
         MyInput();
         Fire();
         UI();
+        
     }
 
     public void UI()
@@ -72,6 +77,9 @@ public class PlayerMovement : MonoBehaviour
         velText.text = "Velocity (.vel)  " + vel;
         dmgText.text = "Damage (.dmg)  " + dmg;
         durText.text = "Durability (.dur)  " + dur;
+
+        healthSlider.value = health / durability;
+        firerateSlider.value = timeTillFire / firerate;
     }
 
     private void FixedUpdate()
@@ -100,8 +108,8 @@ public class PlayerMovement : MonoBehaviour
             {
                 GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
                 bullet.GetComponent<Rigidbody>().AddForce(firePoint.up * bulletSpeed, ForceMode.Force);
+                timeTillFire = firerate;
             }
-            timeTillFire = firerate;
         }
         timeTillFire -= Time.deltaTime;
     }
@@ -125,6 +133,7 @@ public class PlayerMovement : MonoBehaviour
         Vector3 spawnPoint = new Vector3(0f,7f,-70f);
         this.transform.position = spawnPoint;
         velocity = temp;
+        health = durability;
     }
 
     public void TakeDamage()
