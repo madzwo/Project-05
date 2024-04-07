@@ -65,19 +65,11 @@ public class Spawner : MonoBehaviour
     public void TakeDamage(float dmg)
     {
         health -= dmg;
+        sphere.transform.localScale -= new Vector3(.1f,.1f,.1f);
         if (health <= 0)
         {
             Instantiate(deadSpawner, transform.position, transform.rotation);
             Destroy(gameObject);
-        }
-    }
-
-    public void OnCollisionEnter(Collision collision)
-    {
-        if(collision.gameObject.tag == "playerBullet")
-        {
-            sphere.transform.localScale -= new Vector3(.1f,.1f,.1f);
-
         }
     }
 }
