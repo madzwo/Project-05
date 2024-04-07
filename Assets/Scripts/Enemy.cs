@@ -35,4 +35,15 @@ public class Enemy : MonoBehaviour
             }
         }
     }
+
+    public void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "playerBullet")
+        {
+            Debug.Log("hit");
+            Destroy(collision.gameObject);
+            Destroy(gameObject);
+        }
+    }
 }
+

@@ -29,6 +29,7 @@ TagManager:
   - ScannerLvl5
   - LazerScanner
   - Enemy
+  - playerBullet
   layers:
   - Default
   - TransparentFX
