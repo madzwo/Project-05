@@ -28,6 +28,7 @@ TagManager:
   - ScannerLvl4
   - ScannerLvl5
   - LazerScanner
+  - Enemy
   layers:
   - Default
   - TransparentFX
