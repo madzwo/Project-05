@@ -32,6 +32,8 @@ public class PlayerMovement : MonoBehaviour
     public TMP_Text velText;
     public TMP_Text dmgText;
     public TMP_Text durText;
+    public TMP_Text firerateText;
+
 
     public GameObject bulletPrefab;
     public Transform firePoint;
@@ -54,14 +56,14 @@ public class PlayerMovement : MonoBehaviour
 
         clearance = 1;
         health = 5f;
-        timeTillFire = 2f;
+        timeTillFire = 0f;
     }
 
     void Update()
     {
         velocity = 25f + (vel * 25f);
         durability = 5f + (dur - 1f); // (maxHealth)
-        firerate = 2f - ((frt - 1f) * .4f);
+        firerate = 1f - ((frt - 1f) * .2f);
         damage = 3f + (dmg - 1f);
 
 
@@ -73,10 +75,12 @@ public class PlayerMovement : MonoBehaviour
 
     public void UI()
     {
-        clearanceText.text = "Security Clearance Lvl " + clearance;
-        velText.text = "Velocity (.vel)  " + vel;
-        dmgText.text = "Damage (.dmg)  " + dmg;
-        durText.text = "Durability (.dur)  " + dur;
+        clearanceText.text = "Security Lvl  " + clearance;
+        velText.text = "Velocity  " + vel;
+        dmgText.text = "Damage  " + dmg;
+        durText.text = "Durability  " + dur;
+        firerateText.text = "Fire Rate  " + frt;
+
 
         healthSlider.value = health / durability;
         firerateSlider.value = timeTillFire / firerate;
@@ -145,11 +149,20 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    public void OnTriggerEnter(Collider collision)
+    {
+        if(collision.gameObject.CompareTag("baseSphere"))
+        {
+            Debug.Log("base");
+            health = durability;        
+        }
+    }
+
     public void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.CompareTag("baseSphere"))
         {
-            health = durability;
+            health = durability;        
         }
         if(collision.gameObject.CompareTag("durChip"))
         {
@@ -212,14 +225,12 @@ public class PlayerMovement : MonoBehaviour
             Destroy(collision.gameObject);
         }
 
-
         if(collision.gameObject.CompareTag("End"))
         {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
             int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
             SceneManager.LoadScene(currentSceneIndex + 1);
         }
-
-
     }
-
 }
